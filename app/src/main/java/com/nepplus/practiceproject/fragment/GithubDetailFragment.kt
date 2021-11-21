@@ -7,23 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.nepplus.practiceproject.databinding.FragmentGithubBinding
 import com.nepplus.practiceproject.databinding.FragmentGithubDetailBinding
 import com.nepplus.practiceproject.model.User
 import com.nepplus.practiceproject.viewmodel.GithubViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GithubDetailFragment : Fragment(){
 
     lateinit var binding: FragmentGithubDetailBinding
 
-    val viewModel : GithubViewModel by viewModels()
+    val viewModel : GithubViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = FragmentGithubDetailBinding.inflate(inflater, container, false).apply {
-        lifecycleOwner = this@GithubDetailFragment
         binding = this
     }.root
 
@@ -33,9 +32,9 @@ class GithubDetailFragment : Fragment(){
         val user = arguments?.getParcelable<User>(GITHUB_USER)
 
         binding.apply {
-            user?.let {
+            user?.let { user ->
                 Glide.with(this.root).load(user.avatar_url).into(detailImage)
-                detailName.text = user.email
+                detailName.text = user.login
             }
         }
     }

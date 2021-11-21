@@ -94,8 +94,8 @@ class GithubAdapter : ListAdapter<User, GithubViewHolder>(User.DiffUtil){
 
         holder.binding.apply {
             Glide.with(this.root).load(getItem(position).avatar_url).into(image)
-            title.text = getItem(position).email
-            subTitle.text = getItem(position).blog
+            title.text = getItem(position).login
+            subTitle.text = getItem(position).repos_url
 //            invoke -> 람다 호출식
         }.also {
             it.root.setOnClickListener {
